@@ -27,18 +27,19 @@ def prepare_model(precision):
 
 
 def load_model(precision):
-    from transformers import AutoConfig, AutoModel, AutoTokenizer
+    from transformers import AutoModel, AutoTokenizer # , AutoConfig
     # import torch
 
     global tokenizer, model
 
-    # Load pretrained model and tokenizer
-    config = AutoConfig.from_pretrained(model_path, trust_remote_code=True)
-    config.pre_seq_len = 128
-    config.prefix_projection = False
+    # # Load pretrained model and tokenizer
+    # config = AutoConfig.from_pretrained(model_path, trust_remote_code=True)
+    # config.pre_seq_len = 128
+    # config.prefix_projection = False
 
     tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-    model = AutoModel.from_pretrained(model_path, config=config, trust_remote_code=True)
+    model = AutoModel.from_pretrained(model_path, trust_remote_code=True)
+    # model = AutoModel.from_pretrained(model_path, config=config, trust_remote_code=True)
 
     # if cmd_opts.ptuning_checkpoint is not None:
     #     # Load ptuning weights

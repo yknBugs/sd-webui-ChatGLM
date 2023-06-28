@@ -38,7 +38,6 @@ def predict(ctx, query, max_length, top_p, temperature, use_stream_chat):
 
 def regenerate(ctx, max_length, top_p, temperature, use_stream_chat):
     if not ctx.rh:
-        print('*' * 50)
         raise RuntimeError("Content does not exist")
     
     query, output = ctx.rh.pop()
@@ -54,7 +53,6 @@ def clear_history(ctx):
 def edit_history(ctx, log, idx):
     if log == '':
         return ctx.rh, {'visible': True, '__type__': 'update'},  {'value': ctx.history[idx[0]][idx[1]], '__type__': 'update'}, idx
-    print('+' * 50)
     print(ctx.history[idx[0]][idx[1]])
     print("----->")
     print(log)
