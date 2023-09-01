@@ -32,6 +32,9 @@ def load_model(precision):
 
     global tokenizer, model
 
+    if model is not None:
+        return f"Model has already loaded. Cannot load again."
+
     # # Load pretrained model and tokenizer
     # config = AutoConfig.from_pretrained(model_path, trust_remote_code=True)
     # config.pre_seq_len = 128
