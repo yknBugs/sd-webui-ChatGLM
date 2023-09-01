@@ -54,8 +54,14 @@ def load_model(precision):
     return f"Successfully load model using {precision}"
 
 def unload_model():
-    if model:
+    global model
+    if model is not None:
         del model
+        model = None
+        if torch.cuda.is_available():
+            with torch.cuda.device("cuda"):
+                torch.cuda.empty_cache()
+                torch.cuda.ipc_collect()
         return "Successfully unload model"
     return "Model not load"
 

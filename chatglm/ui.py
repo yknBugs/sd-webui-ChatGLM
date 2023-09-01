@@ -91,7 +91,7 @@ def on_ui_tabs():
                     unloadmodel = gr.Button("Unload ChatGLM Model")
 
                 with gr.Row():
-                    precision = gr.Radio(choices=["fp32", "bf16", "fp16", "int8", "int4"], value="fp16", label="Precision", elem_id="checkpoint_precision")
+                    precision = gr.Radio(choices=["fp32", "bf16", "fp16", "int8", "int4"], value="int4", label="Precision", elem_id="checkpoint_precision")
 
                 with gr.Row():
                     with gr.Column(variant="panel"):

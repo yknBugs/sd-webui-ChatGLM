@@ -1,0 +1,9 @@
+icetk
+cpm_kernels
+gradio
+mdtex2html
+protobuf>=3.19.5
+transformers==4.30.2
+torch>=2.0
+sentencepiece
+accelerate
