@@ -13,7 +13,7 @@ import modules.scripts as scripts
 import modules.devices as devices
 from modules import sd_samplers, processing
 
-# css = "style.css"
+css = "style.css"
 script_path = os.path.join(scripts.basedir(), "scripts")
 _gradio_template_response_orig = gr.routes.templates.TemplateResponse
 
@@ -110,10 +110,9 @@ def apply_max_words_click(ctx, max_words):
     return f"Applied: Max Word Limit {ctx.max_words}"
 
 def on_ui_tabs():
-    reload_javascript()
+    # reload_javascript()
 
-    # with gr.Blocks(css=css, analytics_enabled=False) as customex_interface:
-    with gr.Blocks(analytics_enabled=False) as customex_interface:
+    with gr.Blocks(css=css, analytics_enabled=False) as customex_interface:
         _ctx = Context()
         state = gr.State(_ctx)
         with gr.Row():
@@ -180,7 +179,7 @@ def on_ui_tabs():
                 log_idx = gr.State([])
 
                 with gr.Row():
-                    input_message = gr.Textbox(placeholder="Enter your words...(Press Ctrl+Enter to send)", show_label=False, lines=4, elem_id="chat-input", container=False)
+                    input_message = gr.Textbox(placeholder="Enter your words...", show_label=False, lines=4, elem_id="chat-input", container=False)
                     clear_input = gr.Button("🗑️", elem_id="del-btn")
                     stop_generate = gr.Button("❌", elem_id="del-btn")
 
