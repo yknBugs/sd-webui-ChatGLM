@@ -13,7 +13,7 @@ import modules.scripts as scripts
 import modules.devices as devices
 from modules import sd_samplers, processing
 
-css = "style.css"
+# css = "style.css"
 script_path = os.path.join(scripts.basedir(), "scripts")
 _gradio_template_response_orig = gr.routes.templates.TemplateResponse
 
@@ -112,7 +112,8 @@ def apply_max_words_click(ctx, max_words):
 def on_ui_tabs():
     reload_javascript()
 
-    with gr.Blocks(css=css, analytics_enabled=False) as customex_interface:
+    # with gr.Blocks(css=css, analytics_enabled=False) as customex_interface:
+    with gr.Blocks(analytics_enabled=False) as customex_interface:
         _ctx = Context()
         state = gr.State(_ctx)
         with gr.Row():
@@ -232,7 +233,7 @@ def on_ui_tabs():
             chatbot.select(gr_show_and_load, inputs=[state], outputs=[edit_log, log, log_idx])
             submit_log.click(edit_history, inputs=[state, log, log_idx], outputs=[chatbot, edit_log, log, log_idx])
             cancel_log.click(gr_hide, outputs=[edit_log, log, log_idx])
-            force_vram_release(vram_release, inputs=[], outputs=[cmd_output])
+            force_vram_release.click(vram_release, inputs=[], outputs=[cmd_output])
     
     return [(customex_interface, 'ChatGLM', 'chatglm')]
 
