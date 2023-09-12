@@ -3,6 +3,7 @@ from typing import Optional, List, Tuple
 import os
 import traceback
 import torch
+import gradio as gr
 import modules.scripts as scripts
 
 tokenizer = None
@@ -44,15 +45,6 @@ def load_model(precision):
     model = AutoModel.from_pretrained(model_path, trust_remote_code=True)
     # model = AutoModel.from_pretrained(model_path, config=config, trust_remote_code=True)
 
-    # if cmd_opts.ptuning_checkpoint is not None:
-    #     # Load ptuning weights
-    #     prefix_state_dict = torch.load(os.path.join(cmd_opts.ptuning_checkpoint, "pytorch_model.bin"))
-    #     new_prefix_state_dict = {}
-    #     for k, v in prefix_state_dict.items():
-    #         if k.startswith("transformer.prefix_encoder."):
-    #             new_prefix_state_dict[k[len("transformer.prefix_encoder."):]] = v
-    #
-    #    model.transformer.prefix_encoder.load_state_dict(new_prefix_state_dict)
     prepare_model(precision)
     return f"Successfully load model using {precision}"
 
@@ -72,7 +64,7 @@ def infer(query,
           history: Optional[List[Tuple]],
           max_length, top_p, temperature, use_stream_chat: bool):
     if not model:
-        raise RuntimeError("Model not load")
+        raise gr.Error("Model not load")
 
     if history is None:
         history = []
